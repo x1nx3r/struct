@@ -23,8 +23,6 @@ void display_char_menu(){
     printf("3. Char 3\n");  
 }
 
-
-
 int main() {
     struct character char1 = {"-", "-", 0, 0, 0, 0};
     struct character char2 = {"-", "-", 0, 0, 0, 0};
@@ -97,6 +95,7 @@ int main() {
                 printf("weight: %.1f \n", char1.weight);
                 printf("Health: %.1f \n", char1.hp);
                 printf("Level:  %d \n", char1.lvl);
+                break;
             case 2 :
                 printf("Name:   %s \n", char2.name);
                 printf("Gender: %s \n", char2.gender);
@@ -104,6 +103,7 @@ int main() {
                 printf("weight: %.1f \n", char2.weight);
                 printf("Health: %.1f \n", char2.hp);
                 printf("Level:  %d \n", char2.lvl);
+                break;
             case 3 :
                 printf("Name:   %s \n", char3.name);
                 printf("Gender: %s \n", char3.gender);
@@ -111,6 +111,7 @@ int main() {
                 printf("weight: %.1f \n", char3.weight);
                 printf("Health: %.1f \n", char3.hp);
                 printf("Level:  %d \n", char3.lvl);    
+                break;
             default:
                 break;
             }
