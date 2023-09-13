@@ -110,8 +110,13 @@ int main() {
                 printf("Height: %.1f \n", char3.height);
                 printf("weight: %.1f \n", char3.weight);
                 printf("Health: %.1f \n", char3.hp);
+<<<<<<< HEAD
                 printf("Level:  %d \n", char3.lvl);    
                 break;
+=======
+                printf("Level:  %d \n", char3.lvl);
+                break;    
+>>>>>>> 5ed0dff (commit)
             default:
                 break;
             }
@@ -125,17 +130,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-    // Declare and initialize a struct variable
-    struct warrior warrior = {"Alice", "Female", 154, 49, 1000, 1};
-
-    // Access and display the information
-    printf("Name : %s\n", warrior.name);
-    printf("Gender: %s\n", warrior.gender);
-    printf("Height : %.2f\n", warrior.height);
-    printf("Weight : %.2f\n", warrior.weight);
-    printf("Curent HP : %.2f\n", warrior.hp);
-    printf("Current level : %d\n", warrior.lvl);
-*/
