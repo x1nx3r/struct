@@ -110,15 +110,9 @@ int main() {
                 printf("Height: %.1f \n", char3.height);
                 printf("weight: %.1f \n", char3.weight);
                 printf("Health: %.1f \n", char3.hp);
-<<<<<<< HEAD
                 printf("Level:  %d \n", char3.lvl);    
-                break;
-=======
                 printf("Level:  %d \n", char3.lvl);
                 break;    
->>>>>>> 5ed0dff (commit)
-            default:
-                break;
             }
             break;
         default:
