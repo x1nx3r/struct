@@ -122,9 +122,18 @@ int main(){
 
     //SOAL 3
     //inisialisasi string(char pointer) dan memasukkan password
-    const char* passwd;
-    printf("\n(Password harus mengandung '!' dan lebih dari 8 char) input passwd :");
-    scanf("%s",passwd);
+    //karena password yang akan dihandle harus berbentuk mutable (const char*)
+    //maka harus melakukan workaround dengan menetapkan buffer dan melempar isi buffer ke const char* password
+    char buffer[100]; // Mutable buffer to read input
+    const char* passwd; // Const pointer to store the input
+
+    printf("\nMasukkan passsword yang dicek: ");
+    if (scanf("%99s", buffer) == 1) { // baca < 99 char untuk menghindari overflow
+        passwd = buffer; // lempar nilai buffer ke passwd
+    } else {
+        printf("gagal membaca input.\n");
+    };
+
     //Implementasi fungsi cek password dengan return value
     if (cek_password(passwd) == true){
         printf("Password baik!\n");
