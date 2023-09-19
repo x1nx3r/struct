@@ -1,6 +1,15 @@
+/*
+
+    TUGAS 1 PEMROGRAMAN LANJUT (STRUCT)
+    NAMA : Muhammad Mega Nugraha
+    NPM : 22081010213
+    KELAS : E081
+
+*/
+
 #include <stdio.h>
 
-// Struct for your own profile
+// Struct template untuk character profile
 struct character {
     char name[50];
     char gender[12];
@@ -10,12 +19,14 @@ struct character {
     int lvl;
 };
 
+// fungsi display menu agar tidak memenuhi main
 void display_main_menu(){
     printf("------Character Creation Window------\n");
     printf("1. Create characters\n");
     printf("2. Display already created characters\n");
 }
 
+// fungsi display char_menu agar tidak memenuhi main
 void display_char_menu(){
     printf("------Character Selection Menu------\n");
     printf("1. Char 1\n");
@@ -24,14 +35,18 @@ void display_char_menu(){
 }
 
 int main() {
+    // setting initial value untuk tiap char agar tidak terjadi undefined identifier
     struct character char1 = {"-", "-", 0, 0, 0, 0};
     struct character char2 = {"-", "-", 0, 0, 0, 0};
     struct character char3 = {"-", "-", 0, 0, 0, 0};
 
+    // main loop untuk main menu
     while(1){
         int choice=0;
         display_main_menu();
         scanf("%d", &choice);
+
+        //switch case untuk pilihan menu
         switch (choice)
         {
         case 1:
@@ -77,7 +92,8 @@ int main() {
                 char1.lvl = 1;
                 break;
             default:
-                break;
+                printf("Enter the correct value!\n"); //error statement
+                continue;   // use continue so the loop starts over
             }
 
             break;
@@ -112,15 +128,16 @@ int main() {
                 printf("Health: %.1f \n", char3.hp);
                 printf("Level:  %d \n", char3.lvl);    
                 printf("Level:  %d \n", char3.lvl);
-                break;    
+                break; 
+            default:
+                printf("Enter the correct value!\n"); //error statement
+                continue;   // use continue so the loop starts over
             }
             break;
         default:
-            printf("Error occurs, quitting program");
-            break;
+            printf("Enter the correct value!\n"); //error statement
+            continue;   // use continue so the loop starts over
         }
     }
-
-
     return 0;
 }
