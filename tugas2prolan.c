@@ -113,8 +113,8 @@ int main(){
 
     //SOAL 2
     //Inisialisasi nama depan dan belakang
-    const char* dpn = "Slamet";
-    const char* blkng = "Kopling";
+    const char* dpn = "Ahmad";
+    const char* blkng = "Muhammad";
     //implementasi fungsi gabung nama dengan return value
     printf("%s\n", gabung_nama(dpn, blkng));
     //implementasi fungsi gabung nama void
