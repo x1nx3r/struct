@@ -4,9 +4,8 @@
 
 int main() {
 
-    char ex[6];
-    scanf("%5s%n[\n]\n",ex);
+    char ex[5]="This is a buffer overflow";
+    printf("%s\n",ex);
 
-    printf("%s", ex);
     return 0;
 }
