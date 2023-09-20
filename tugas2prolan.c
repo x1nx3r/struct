@@ -122,7 +122,7 @@ int main(){
 
     //SOAL 3
     //inisialisasi string(char pointer) dan memasukkan password
-    //karena password yang akan dihandle harus berbentuk mutable (const char*)
+    //karena password yang akan dihandle harus berbentuk immutable (const char*)
     //maka harus melakukan workaround dengan menetapkan buffer dan melempar isi buffer ke const char* password
     char buffer[100]; // Mutable buffer to read input
     const char* passwd; // Const pointer to store the input
