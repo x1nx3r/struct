@@ -8,6 +8,7 @@
     1. fungsi perpangkatan (void dan return value)
     2. fungsi penggabung nama depan dan nama belakang (void dan return value)
     3. fungsi cek validitas sebuah password: jika syarat password harus mengandung karakter ! dan minimal 8 karakter (void dan return value)
+
 */
 
 #include<stdio.h>   
