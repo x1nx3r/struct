@@ -78,7 +78,6 @@ void gabung_nama_void(const char* depan, const char* belakang){
     printf("void_%s", digabung);
 }
 
-
 // SOAL 3 : Fungsi cek password
 // Fungsi cek password dengan return value
 bool cek_password(const char* passwd){
@@ -141,6 +140,7 @@ int main(){
     } else {
         printf("Password kurang baik\n");
     };
+
     //implementasi fungsi cek password void
     cek_password_void(passwd);
 
