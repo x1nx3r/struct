@@ -19,7 +19,22 @@ int main() {
     int cmp=strcmp(ex3, ex4);
     printf("\n%d",cmp);
 
+    const char* ex5="meong";
 
+    if (strchr(ex5, 'm')!= NULL){
+        printf("\n%s\n", ex5);
+    };
+
+    char input[] = "This is a sample sentence.";
+    char *token;
+    
+    // Tokenize the input string based on spaces
+    token = strtok(input, " ");
+
+    while (token != NULL) {
+        printf("Token: %s\n", token);
+        token = strtok(NULL, " "); // Pass NULL to continue tokenizing the same string
+    }
 
     return 0;
     
