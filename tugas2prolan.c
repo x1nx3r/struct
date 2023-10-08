@@ -8,6 +8,7 @@
     1. fungsi perpangkatan (void dan return value)
     2. fungsi penggabung nama depan dan nama belakang (void dan return value)
     3. fungsi cek validitas sebuah password: jika syarat password harus mengandung karakter ! dan minimal 8 karakter (void dan return value)
+
 */
 
 #include<stdio.h>   
@@ -77,7 +78,6 @@ void gabung_nama_void(const char* depan, const char* belakang){
     printf("void_%s", digabung);
 }
 
-
 // SOAL 3 : Fungsi cek password
 // Fungsi cek password dengan return value
 bool cek_password(const char* passwd){
@@ -122,7 +122,7 @@ int main(){
 
     //SOAL 3
     //inisialisasi string(char pointer) dan memasukkan password
-    //karena password yang akan dihandle harus berbentuk mutable (const char*)
+    //karena password yang akan dihandle harus berbentuk immutable (const char*)
     //maka harus melakukan workaround dengan menetapkan buffer dan melempar isi buffer ke const char* password
     char buffer[100]; // Mutable buffer to read input
     const char* passwd; // Const pointer to store the input
@@ -140,6 +140,7 @@ int main(){
     } else {
         printf("Password kurang baik\n");
     };
+
     //implementasi fungsi cek password void
     cek_password_void(passwd);
 
