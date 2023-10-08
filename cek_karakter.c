@@ -45,9 +45,9 @@ int hitung_kata_sama (const char* string, const char* kata){
 
     // Iterate through the string until no more occurrences are found
     for (const char* ptr = string; (ptr = strstr(ptr, kata)) != NULL; ++ptr) {
-        // Increment the count
+        //+1 setiap ada kata yang ditemukan/strstr(ptr, kata) != NULL
         ++count;
-        // Move the pointer forward by the length of the needle to avoid counting the same occurrence multiple times
+        //Majukan pointer ptr sebanyak panjang kata - 1 agar tidak menghitung ulang kata yang sudah dihitung
         ptr += panjang_kata - 1;
     }
 
@@ -71,7 +71,7 @@ int main(){
 
     //Implementasi mencari jumlah kata yang identik dalam string
     printf("\n%d", hitung_kata_sama(soala, str));
-    
+
     return 0;
 }
 
