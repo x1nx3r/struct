@@ -1,14 +1,21 @@
+/*
+
+    TUGAS 1 PEMROGRAMAN LANJUT (STRUCT)
+    NAMA : Muhammad Mega Nugraha
+    NPM : 22081010213
+    KELAS : E081
+
+*/
+
 #include<stdio.h>   
 #include<string.h>  //Module untuk fungsi manipulasi string
-#include<stdlib.h> 
 #include<stdbool.h>
 
-//fungsi untuk menghitung jumlah karakter
+//fungsi untuk menghitung jumlah karakter tanpa spasi
 int hitung_karakter(const char* string){
     int space;
     int len=strlen(string);
     for (const char *ptr = string; *ptr != '\0'; ++ptr) {
-        // Access the current character using *ptr
         if (*ptr == ' '){
             ++space;
             continue;
@@ -22,7 +29,6 @@ int hitung_kata(const char* string){
     int word = 0;
     bool status;
     for (const char *ptr = string; *ptr != '\0'; ++ptr) {
-        // Access the current character using *ptr
         if (*ptr == ' '){
             if (status==true){
                 ++word;
@@ -43,7 +49,7 @@ int hitung_kata_sama (const char* string, const char* kata){
     int count = 0;
     size_t panjang_kata = strlen(kata);
 
-    // Iterate through the string until no more occurrences are found
+    // mulai iterasi dengan kondisi strstr(ptr, kata)
     for (const char* ptr = string; (ptr = strstr(ptr, kata)) != NULL; ++ptr) {
         //+1 setiap ada kata yang ditemukan/strstr(ptr, kata) != NULL
         ++count;
@@ -59,18 +65,21 @@ int main(){
     const char* soala = "satusatu satu lima";
 
     //Implementasi menghitung karakter
-    printf("%d\n", hitung_karakter(soal));
+    printf("banyak karakter tanpa spasi : %d\n", hitung_karakter(soal));
+    printf("banyak karakter dengan spasi : %d\n", strlen(soal));
 
     //Implementasi menghitung kata
-    printf("%d", hitung_kata(soala));
+    printf("banyak kata : %d\n", hitung_kata(soal));
 
     //Implementasi mencari satu kata dalam string menggunakan strstr()
-    const char* str = "satu";
+    const char* str = "dan";
     const char* result = strstr(soal, str);
-    printf("\nkata '%s' ditemukan", str);
+    if (result != NULL){
+        printf("kata '%s' ditemukan\n", str);
+    };
 
     //Implementasi mencari jumlah kata yang identik dalam string
-    printf("\n%d", hitung_kata_sama(soala, str));
+    printf("banyak jumlah kata '%s' adalah : %d\n", str, hitung_kata_sama(soal, str));
 
     return 0;
 }
