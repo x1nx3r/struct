@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Contact {
+    char name[50];
+    char cellphone[15];
+};
+
+int compareByName(const struct Contact *a, const struct Contact *b) {
+    return strcmp(a->name, b->name);
+}
+
+int compareByCellphone(const struct Contact *a, const struct Contact *b) {
+    return strcmp(a->cellphone, b->cellphone);
+}
+
+void bubbleSort(struct Contact contacts[], int size, int (*compare)(const struct Contact *, const struct Contact *)) {
+    int swapped;
+    for (int i = 0; i < size - 1; i++) {
+        swapped = 0;
+        for (int j = 0; j < size - i - 1; j++) {
+            if (compare(&contacts[j], &contacts[j + 1]) > 0) {
+                struct Contact temp = contacts[j];
+                contacts[j] = contacts[j + 1];
+                contacts[j + 1] = temp;
+                swapped = 1;
+
+                printf("Swapping %s with %s\n", contacts[j].name, contacts[j + 1].name);
+            }
+        }
+        if (swapped == 0) {
+            // If no two elements were swapped in the inner loop, the array is already sorted.
+            break;
+        }
+    }
+}
+
+int main() {
+    struct Contact contacts[] = {
+        {"Alice", "555-1111"},
+        {"Charlie", "555-3333"},
+        {"Bob", "555-2222"},
+        {"David", "555-4444"},
+    };
+
+    int numContacts = sizeof(contacts) / sizeof(contacts[0]);
+
+    printf("Original order:\n");
+    for (int i = 0; i < numContacts; i++) {
+        printf("Name: %s, Cellphone: %s\n", contacts[i].name, contacts[i].cellphone);
+    }
+
+    // Sort by name
+    printf("\nSorting by name:\n");
+    bubbleSort(contacts, numContacts, compareByName);
+
+    printf("\nSorted by name:\n");
+    for (int i = 0; i < numContacts; i++) {
+        printf("Name: %s, Cellphone: %s\n", contacts[i].name, contacts[i].cellphone);
+    }
+
+    // Sort by cellphone number
+    printf("\nSorting by cellphone number:\n");
+    bubbleSort(contacts, numContacts, compareByCellphone);
+
+    printf("\nSorted by cellphone number:\n");
+    for (int i = 0; i < numContacts; i++) {
+        printf("Name: %s, Cellphone: %s\n", contacts[i].name, contacts[i].cellphone);
+    }
+
+    return 0;
+}
