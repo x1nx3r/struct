@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 // Struct template untuk character profile
 struct Mahasiswa {
@@ -72,6 +73,9 @@ void selectionSort(struct Mahasiswa identitas[], int size, int (*compare)(const 
 }
 
 void insertionSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
+    // Record start time
+    clock_t start = clock();
+
     for (int i = 1; i < size; i++) {
         struct Mahasiswa key = identitas[i];
         int j = i - 1;
@@ -84,14 +88,92 @@ void insertionSort(struct Mahasiswa identitas[], int size, int (*compare)(const 
         }
         identitas[j + 1] = key;
     }
+    // Record the end time
+    clock_t end = clock();
+
+    // Calculate the CPU time used
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    // Print the execution time
+    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
+}
+
+// fungsi interpolation search
+int interpolationSearch(const struct Mahasiswa identitas[], int size, const char key[]) {
+    // Record start time
+    clock_t start = clock();
+    
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high && strcmp(key, identitas[low].nama) >= 0 && strcmp(key, identitas[high].nama) <= 0) {
+        if (low == high) {
+            if (strcmp(identitas[low].nama, key) == 0) return low;
+            return -1;  // Element not found
+        }
+
+        // Interpolation formula
+        int pos = low + ((high - low) / (strcmp(identitas[high].nama, identitas[low].nama))) * (strcmp(key, identitas[low].nama));
+        
+        if (strcmp(identitas[pos].nama, key) == 0) return pos;
+
+        if (strcmp(identitas[pos].nama, key) < 0)
+            low = pos + 1;
+        else
+            high = pos - 1;
+    }
+
+    // Record the end time
+    clock_t end = clock();
+
+    // Calculate the CPU time used
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    // Print the execution time
+    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
+
+    return -1;  // Element not found
+}
+
+// fungsi binary search
+int binarySearch(const struct Mahasiswa identitas[], int size, const char key[]) {
+    // Record start time
+    clock_t start = clock();
+    
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        int cmp = strcmp(identitas[mid].nama, key);
+
+        if (cmp == 0) return mid;  // Element found
+        else if (cmp < 0) low = mid + 1;
+        else high = mid - 1;
+    }
+
+    // Record the end time
+    clock_t end = clock();
+
+    // Calculate the CPU time used
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    // Print the execution time
+    printf("Time taken by interpolationSearch: %f seconds\n", cpu_time_used);
+
+    return -1;  // Element not found
 }
 
 // fungsi display menu agar tidak memenuhi main
 void display_main_menu() {
-    printf("------Pengurutan Data Mahasiswa------\n");
+    printf("------Pengurutan dan Pencarian Data Mahasiswa------\n");
     printf("1. Urutkan dengan Bubble Sort\n");
     printf("2. Urutkan dengan Selection Sort\n");
     printf("3. Urutkan dengan Insertion Sort\n");
+    printf("4. Cari berdasarkan nama dengan Binary Search\n");
+    printf("5. Cari berdasarkan nama dengan Interpolation Search\n");
+    printf("Fungsi search akan secara otomatis mengurutkan data berdasarkan nama\n");
 }
 
 // fungsi display char_menu agar tidak memenuhi main
@@ -102,16 +184,20 @@ void display_pilihan_sort() {
     printf("4. Sort Berdasarkan IPK\n");
 }
 
+void menu_search(){
+    printf("");
+}
+
 int main() {
     // setting initial value untuk tiap char agar tidak terjadi undefined identifier
     struct Mahasiswa identitas[] = {
-        {"Udin", "17081010013", "Informatika", 2.7},
-        {"Slamet", "19012010043", "Teknik Sipil", 3.4},
-        {"Opang", "20081010133", "Teknik Industri", 3.3},
         {"Aisyah", "22081800513", "Akuntansi", 1.1},
         {"Andi", "22081134013", "Ekonomi Pembangunan", 3.6},
-        {"Tono", "22081008122", "Sistem Informasi", 2.6},
         {"Fitri", "23081013432", "Fisika", 1.9},
+        {"Opang", "20081010133", "Teknik Industri", 3.3},
+        {"Slamet", "19012010043", "Teknik Sipil", 3.4},
+        {"Tono", "22081008122", "Sistem Informasi", 2.6},
+        {"Udin", "17081010013", "Informatika", 2.7}
     };
 
     int jmlMahasiswa = sizeof(identitas) / sizeof(identitas[0]);
@@ -189,7 +275,6 @@ int main() {
             break;
         case 2:
             choice = 0;
-            int brick;
             display_pilihan_sort();
             scanf("%d", &choice);
             switch (choice) {
@@ -310,6 +395,35 @@ int main() {
             default:
                 printf("Enter the correct value!\n"); //error statement
                 continue;                               // use continue so the loop starts over
+            }
+            break;
+
+        case 4: //binary search
+            printf("Masukkan nama yang akan di search: ");
+            char searchKey[50];
+            scanf("%s", searchKey);
+            bubbleSort(identitas, jmlMahasiswa, compareByNama);
+            int result = interpolationSearch(identitas, jmlMahasiswa, searchKey);
+            if (result != -1) {
+                printf("Ditemukan di index: %d\n", result);
+                printf("Dengan identitas lengkap: Name: %s, NPM: %s, Prodi: %s, IPK: %.2f\n",
+                    identitas[result].nama, identitas[result].npm, identitas[result].prodi, identitas[result].ipk);
+            } else {
+                printf("Tidak ditemukan.\n");
+            }
+            break;
+        case 5:
+            printf("Masukkan nama yang akan di search: ");
+            char Key[50];
+            scanf("%s", Key);
+            bubbleSort(identitas, jmlMahasiswa, compareByNama);
+            int resultInterpolation = binarySearch(identitas, jmlMahasiswa, Key);
+            if (resultInterpolation != -1) {
+                printf("Ditemukan di index: %d\n", resultInterpolation);
+                printf("Dengan identitas lengkap: Name: %s, NPM: %s, Prodi: %s, IPK: %.2f\n",
+                    identitas[resultInterpolation].nama, identitas[resultInterpolation].npm, identitas[resultInterpolation].prodi, identitas[resultInterpolation].ipk);
+            } else {
+                printf("Tidak ditemukan.\n");
             }
             break;
         default:
