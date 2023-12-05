@@ -127,6 +127,14 @@ int binarySearch(const struct Mahasiswa identitas[], int size, const char key[])
     return -1;  // Element not found
 }
 
+void displaySemua(const struct Mahasiswa identitas[], int size) {
+    printf("------ Semua data mahasiswa ------\n");
+    for (int i = 0; i < size; i++) {
+        printf("Name: %s, NPM: %s, Prodi: %s, IPK: %.2f\n", identitas[i].nama, identitas[i].npm, identitas[i].prodi, identitas[i].ipk);
+    }
+    printf("------ ****************** ------\n");
+}
+
 // fungsi display menu agar tidak memenuhi main
 void display_main_menu() {
     printf("------Pengurutan dan Pencarian Data Mahasiswa------\n");
@@ -135,6 +143,7 @@ void display_main_menu() {
     printf("3. Urutkan dengan Insertion Sort\n");
     printf("4. Cari berdasarkan nama dengan Binary Search\n");
     printf("5. Cari berdasarkan nama dengan Interpolation Search\n");
+    printf("6. Display semua data\n");
     printf("Fungsi search akan secara otomatis mengurutkan data berdasarkan nama\n");
 }
 
@@ -388,6 +397,10 @@ int main() {
             } else {
                 printf("Tidak ditemukan.\n");
             }
+            break;
+        case 6: //display semua data secara urutan yang ada
+            int jmlMahasiswa = sizeof(identitas) / sizeof(identitas[0]);
+            displaySemua(identitas, jmlMahasiswa);
             break;
         default:
             printf("Enter the correct value!\n"); //error statement
