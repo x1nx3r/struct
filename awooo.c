@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 
 // Struct template untuk character profile
 struct Mahasiswa {
@@ -33,9 +32,6 @@ int compareByIpk(const struct Mahasiswa *a, const struct Mahasiswa *b) {
 }
 
 void bubbleSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
-    // Record start time
-    clock_t start = clock();
-
     int swapped;
     for (int i = 0; i < size - 1; i++) {
         swapped = 0;
@@ -54,21 +50,9 @@ void bubbleSort(struct Mahasiswa identitas[], int size, int (*compare)(const str
             break;
         }
     }
-    
-    // Record the end time
-    clock_t end = clock();
-
-    // Calculate the CPU time used
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    // Print the execution time
-    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
 }
 
 void selectionSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
-    // Record start time
-    clock_t start = clock();
-
     for (int i = 0; i < size - 1; i++) {
         int minIndex = i;
         for (int j = i + 1; j < size; j++) {
@@ -85,20 +69,9 @@ void selectionSort(struct Mahasiswa identitas[], int size, int (*compare)(const 
             printf("swapping %s with %s\n", identitas[i].nama, identitas[minIndex].nama);
         }
     }
-    // Record the end time
-    clock_t end = clock();
-
-    // Calculate the CPU time used
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    // Print the execution time
-    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
 }
 
 void insertionSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
-    // Record start time
-    clock_t start = clock();
-
     for (int i = 1; i < size; i++) {
         struct Mahasiswa key = identitas[i];
         int j = i - 1;
@@ -111,21 +84,10 @@ void insertionSort(struct Mahasiswa identitas[], int size, int (*compare)(const 
         }
         identitas[j + 1] = key;
     }
-    // Record the end time
-    clock_t end = clock();
-
-    // Calculate the CPU time used
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    // Print the execution time
-    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
 }
 
 // fungsi interpolation search
 int interpolationSearch(const struct Mahasiswa identitas[], int size, const char key[]) {
-    // Record start time
-    clock_t start = clock();
-    
     int low = 0;
     int high = size - 1;
 
@@ -145,24 +107,11 @@ int interpolationSearch(const struct Mahasiswa identitas[], int size, const char
         else
             high = pos - 1;
     }
-
-    // Record the end time
-    clock_t end = clock();
-
-    // Calculate the CPU time used
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    // Print the execution time
-    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
-
     return -1;  // Element not found
 }
 
 // fungsi binary search
 int binarySearch(const struct Mahasiswa identitas[], int size, const char key[]) {
-    // Record start time
-    clock_t start = clock();
-    
     int low = 0;
     int high = size - 1;
 
@@ -175,16 +124,6 @@ int binarySearch(const struct Mahasiswa identitas[], int size, const char key[])
         else if (cmp < 0) low = mid + 1;
         else high = mid - 1;
     }
-
-    // Record the end time
-    clock_t end = clock();
-
-    // Calculate the CPU time used
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    // Print the execution time
-    printf("Time taken by interpolationSearch: %f seconds\n", cpu_time_used);
-
     return -1;  // Element not found
 }
 
@@ -421,12 +360,13 @@ int main() {
             }
             break;
 
-        case 4: //binary search
+        case 4: // Binary search
             printf("Masukkan nama yang akan di search: ");
             char searchKey[50];
             scanf("%s", searchKey);
             bubbleSort(identitas, jmlMahasiswa, compareByNama);
-            int result = interpolationSearch(identitas, jmlMahasiswa, searchKey);
+            binarySearch(identitas, jmlMahasiswa, searchKey);
+            int result = binarySearch(identitas, jmlMahasiswa, searchKey);
             if (result != -1) {
                 printf("Ditemukan di index: %d\n", result);
                 printf("Dengan identitas lengkap: Name: %s, NPM: %s, Prodi: %s, IPK: %.2f\n",
@@ -435,12 +375,12 @@ int main() {
                 printf("Tidak ditemukan.\n");
             }
             break;
-        case 5:
+        case 5: //Interpolation search
             printf("Masukkan nama yang akan di search: ");
             char Key[50];
             scanf("%s", Key);
             bubbleSort(identitas, jmlMahasiswa, compareByNama);
-            int resultInterpolation = binarySearch(identitas, jmlMahasiswa, Key);
+            int resultInterpolation = interpolationSearch(identitas, jmlMahasiswa, Key);
             if (resultInterpolation != -1) {
                 printf("Ditemukan di index: %d\n", resultInterpolation);
                 printf("Dengan identitas lengkap: Name: %s, NPM: %s, Prodi: %s, IPK: %.2f\n",
