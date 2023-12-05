@@ -33,6 +33,9 @@ int compareByIpk(const struct Mahasiswa *a, const struct Mahasiswa *b) {
 }
 
 void bubbleSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
+    // Record start time
+    clock_t start = clock();
+
     int swapped;
     for (int i = 0; i < size - 1; i++) {
         swapped = 0;
@@ -51,9 +54,21 @@ void bubbleSort(struct Mahasiswa identitas[], int size, int (*compare)(const str
             break;
         }
     }
+    
+    // Record the end time
+    clock_t end = clock();
+
+    // Calculate the CPU time used
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    // Print the execution time
+    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
 }
 
 void selectionSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
+    // Record start time
+    clock_t start = clock();
+
     for (int i = 0; i < size - 1; i++) {
         int minIndex = i;
         for (int j = i + 1; j < size; j++) {
@@ -67,9 +82,17 @@ void selectionSort(struct Mahasiswa identitas[], int size, int (*compare)(const 
             identitas[i] = identitas[minIndex];
             identitas[minIndex] = temp;
 
-            printf("Swapping %s with %s\n", identitas[i].nama, identitas[minIndex].nama);
+            printf("swapping %s with %s\n", identitas[i].nama, identitas[minIndex].nama);
         }
     }
+    // Record the end time
+    clock_t end = clock();
+
+    // Calculate the CPU time used
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    // Print the execution time
+    printf("Waktu yang dihabiskan: %f seconds\n", cpu_time_used);
 }
 
 void insertionSort(struct Mahasiswa identitas[], int size, int (*compare)(const struct Mahasiswa *, const struct Mahasiswa *)) {
